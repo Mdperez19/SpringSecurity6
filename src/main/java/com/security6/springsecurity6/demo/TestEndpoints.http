@@ -1,0 +1,25 @@
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "liss",
+  "lastName": "lopez",
+  "email": "test@gmail.com",
+  "password": "1234"
+}
+
+###
+POST http://localhost:8080/api/v1/auth/authenticated
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImlhdCI6MTY5NjMxNzEwMywiZXhwIjoxNjk2MzE4NTQzfQ.TjPhYxLcXZv3sfdWoLPLr02uWNKLlNPDezsWllg_7So
+
+{
+  "email": "test@gmail.com",
+  "password": "1234"
+}
+
+###
+GET http://localhost:8080/api/v1/demo-controller
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImlhdCI6MTY5NjMxNzEwMywiZXhwIjoxNjk2MzE4NTQzfQ.TjPhYxLcXZv3sfdWoLPLr02uWNKLlNPDezsWllg_7So
+
+###

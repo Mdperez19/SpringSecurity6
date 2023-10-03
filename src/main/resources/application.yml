@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jwt_security
+    username: postgres
+    password: sylvatica555NM
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+jwtService:
+  secretKey:
+    value: "dHikHx3564roavW7hU1sloGWWt/rXqS46kPPzVfHUtcp74Pr87y2elSCwGhjfXl9Njxj/3O1+HjTAWq2L0APo9Hid7Auw8SF3ZDwr/bQEaf7056e5za+PQuRXtqomz3vLfU2TeHx3de1ipXxkgdojyPqJzVU+wrjXBjd5GVjgojZgrtmxjQusuqeV4TsuBAHYeEpP8NjCD0JeNC779491dOeQc/mxjga22XPUGQ9X/x4zNIr0KMl8YHoPppycllFBK6bAcTOA+qdoQKuhvRvcM7XzruhTm20FeDVszI3/SCMAAMjcBEwrXIVQMACo2kLe6BAW0kve9WtHufAnGMAqw=="
+    type: "HS256"
