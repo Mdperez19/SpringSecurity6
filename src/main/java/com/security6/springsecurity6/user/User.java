@@ -1,5 +1,6 @@
 package com.security6.springsecurity6.user;
 
+import com.security6.springsecurity6.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,9 @@ public class User implements UserDetails { // UserDetails es una interfaz de Spr
 
     @Enumerated(EnumType.STRING) //para que se guarde como string en la base de datos
     private Role role;
+
+    @OneToMany(mappedBy = "user") //mappedBy es el nombre de la variable en la clase Token
+    private List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

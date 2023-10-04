@@ -1,5 +1,6 @@
 package com.security6.springsecurity6.config;
 
+import com.security6.springsecurity6.token.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private final TokenRepository tokenRepository;
 
     @Override
     protected void doFilterInternal(
@@ -46,12 +48,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
             final UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
 
-            if(jwtService.isTokenValid(jwt,userDetails)){
+            // si el token no esta en la base de datos, no es valido y si esta revocado
+            boolean isTokenValid = tokenRepository.findByToken(jwt)
+                    .map(token -> !token.isExpired() && !token.isRevoked())
+                    .orElse(false);
+            if(jwtService.isTokenValid(jwt,userDetails) && isTokenValid){
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
                         userDetails.getAuthorities()
                 );
+
                 authToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 ); // para que se pueda acceder a los detalles de la autenticacion

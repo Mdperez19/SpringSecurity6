@@ -13,6 +13,10 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  output:
+    ansi:
+      enabled: always
+
 
 jwtService:
   secretKey:
